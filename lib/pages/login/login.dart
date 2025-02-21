@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tugas2/pages/main/consts.dart';
 import 'package:tugas2/pages/home/home.dart';
+import 'package:tugas2/pages/main/consts.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,6 +12,9 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _obscurePassword = true; // Untuk menyembunyikan atau menampilkan password
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  String errorMessage = ''; // Untuk menampilkan pesan error jika login gagal
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +24,10 @@ class _LoginPageState extends State<LoginPage> {
         height: double.maxFinite,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [g1, g2]),
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [g1, g2],
+          ),
         ),
         child: SingleChildScrollView(
           child: Padding(
@@ -47,12 +50,15 @@ class _LoginPageState extends State<LoginPage> {
                   "Please, Login",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
-                      color: kWhiteColor),
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                    color: kWhiteColor,
+                  ),
                 ),
                 SizedBox(height: size.height * 0.024),
+                // Username TextField
                 TextField(
+                  controller: _usernameController,
                   keyboardType: TextInputType.text,
                   style: TextStyle(
                     color: kInputColor,
@@ -75,8 +81,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 SizedBox(height: size.height * 0.024),
-                // Password field dengan ikon mata
+                // Password TextField
                 TextField(
+                  controller: _passwordController,
                   keyboardType: TextInputType.text,
                   obscureText: _obscurePassword, // Menyembunyikan atau menampilkan password
                   style: TextStyle(
@@ -99,9 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        _obscurePassword
-                            ? Icons.visibility_off
-                            : Icons.visibility,
+                        _obscurePassword ? Icons.visibility_off : Icons.visibility,
                         color: Colors.grey,
                       ),
                       onPressed: () {
@@ -113,6 +118,15 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 SizedBox(height: size.height * 0.024),
+                // Error Message
+                if (errorMessage.isNotEmpty)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      errorMessage,
+                      style: TextStyle(color: Colors.red, fontSize: 14),
+                    ),
+                  ),
                 CupertinoButton(
                   padding: EdgeInsets.zero,
                   child: Container(
@@ -133,12 +147,28 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePage(),
-                      ),
-                    );
+                    String username = _usernameController.text;
+                    String password = _passwordController.text;
+
+                    // Validasi input
+                    if (username.isEmpty || password.isEmpty) {
+                      setState(() {
+                        errorMessage = 'Both fields are required!';
+                      });
+                    } else if (username == 'ifkeren' && password == 'if2022') {
+                      // Login sukses
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => HomePage(),
+                        ),
+                      );
+                    } else {
+                      // Jika username atau password salah
+                      setState(() {
+                        errorMessage = 'Invalid username or password';
+                      });
+                    }
                   },
                 ),
               ],

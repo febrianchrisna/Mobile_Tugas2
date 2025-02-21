@@ -1,27 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:tugas2/pages/home/home.dart';
-
-import '../main/consts.dart';
+import 'package:tugas2/pages/main/consts.dart';
 
 class NumberCheckScreen extends StatefulWidget {
   const NumberCheckScreen({super.key});
 
   @override
-  _NumberCheckScreenState createState() => _NumberCheckScreenState();
+  State<NumberCheckScreen> createState() => _NumberCheckScreenState();
 }
 
 class _NumberCheckScreenState extends State<NumberCheckScreen> {
-  final TextEditingController _numberController = TextEditingController();
-  String _result = '';
+  final TextEditingController _controller = TextEditingController();
+  String? _result;
   Color _resultColor = Colors.white; // Default color is white
 
   void _checkNumber() {
-    final input = _numberController.text;
-    final number = int.tryParse(input);
+    final input = _controller.text;
+    if (input.isEmpty) {
+      setState(() {
+        _result = 'Masukkan bilangan terlebih dahulu!';
+        _resultColor = Colors.red; // Set color to red for error
+      });
+      return;
+    }
 
+    final number = int.tryParse(input);
     if (number == null) {
       setState(() {
-        _result = 'Input tidak valid! Masukkan angka yang benar';
+        _result = 'Input tidak valid!';
         _resultColor = Colors.red; // Set color to red for error
       });
       return;
@@ -34,17 +40,11 @@ class _NumberCheckScreenState extends State<NumberCheckScreen> {
   }
 
   @override
-  void dispose() {
-    _numberController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Colors.white,),
           onPressed: () {
             Navigator.pushReplacement(
               context,
@@ -52,13 +52,12 @@ class _NumberCheckScreenState extends State<NumberCheckScreen> {
             );
           },
         ),
-        backgroundColor: g1,
-        elevation: 0,
+        backgroundColor: g1, // You can customize the AppBar color
       ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [g1, g2], // Pastikan g1 dan g2 didefinisikan dengan warna yang sesuai
+            colors: [g1, g2], // g1 and g2 color
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -66,13 +65,14 @@ class _NumberCheckScreenState extends State<NumberCheckScreen> {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            TextFormField(
-              controller: _numberController,
+            TextField(
+              controller: _controller,
               keyboardType: TextInputType.number,
               style: TextStyle(
                 color: kInputColor,
               ),
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
                 labelText: 'Masukkan bilangan',
                 labelStyle: TextStyle(color: Colors.white), // Mengubah warna label menjadi putih
                 enabledBorder: OutlineInputBorder(
@@ -81,16 +81,11 @@ class _NumberCheckScreenState extends State<NumberCheckScreen> {
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white, width: 2), // Border saat fokus
                 ),
-                suffixIcon: Icon(Icons.numbers),
               ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Silakan masukkan angka';
-                }
-                if (int.tryParse(value) == null) {
-                  return 'Masukkan angka yang valid';
-                }
-                return null;
+              onChanged: (value) {
+                setState(() {
+                  _result = null;
+                });
               },
             ),
             const SizedBox(height: 20),
@@ -102,17 +97,24 @@ class _NumberCheckScreenState extends State<NumberCheckScreen> {
               child: const Text('Cek Bilangan'),
             ),
             const SizedBox(height: 30),
-            Text(
-              _result,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: _resultColor, // Use the dynamic color for result
+            if (_result != null)
+              Text(
+                _result!,
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: _resultColor,
+                ),
               ),
-            ),
           ],
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }
