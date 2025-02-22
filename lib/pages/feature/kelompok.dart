@@ -21,7 +21,7 @@ class TeamPage extends StatelessWidget {
     ),
     TeamMember(
       name: "Vinsensius Johan",
-      nim: "1232200",
+      nim: "123220113",
       imagePath: "assets/images/Johan.png", // Ganti dengan path gambar
     ),
   ];
