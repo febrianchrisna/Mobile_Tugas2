@@ -4,6 +4,7 @@ import 'package:tugas2/pages/feature//kalkulator.dart';
 import 'package:tugas2/pages/feature/ganjil_genap.dart';
 import 'package:tugas2/pages/main/consts.dart'; // Pastikan g1 dan g2 terdefinisi di sini
 import 'package:tugas2/pages/login/login.dart'; // Pastikan halaman LoginPage diimport
+import 'package:tugas2/pages/feature/hitung_digit.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -41,7 +42,7 @@ class HomePage extends StatelessWidget {
                 Image.asset(image1),
                 SizedBox(height: size.height * 0.05),
                 Text(
-                  'Please, Select a Menu',
+                  'Menu',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
@@ -67,7 +68,10 @@ class HomePage extends StatelessWidget {
                         end: Alignment.bottomRight,
                       ),
                       borderRadius: BorderRadius.circular(37),
-                      border: Border.all(color: Colors.white, width: 2), // White border
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 2,
+                      ), // White border
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -88,7 +92,9 @@ class HomePage extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => CalculatorScreen()),
+                      MaterialPageRoute(
+                        builder: (context) => CalculatorScreen(),
+                      ),
                     );
                   },
                   child: Container(
@@ -102,7 +108,10 @@ class HomePage extends StatelessWidget {
                         end: Alignment.bottomRight,
                       ),
                       borderRadius: BorderRadius.circular(37),
-                      border: Border.all(color: Colors.white, width: 2), // White border
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 2,
+                      ), // White border
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -123,7 +132,9 @@ class HomePage extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => NumberCheckScreen()),
+                      MaterialPageRoute(
+                        builder: (context) => NumberCheckScreen(),
+                      ),
                     );
                   },
                   child: Container(
@@ -137,7 +148,10 @@ class HomePage extends StatelessWidget {
                         end: Alignment.bottomRight,
                       ),
                       borderRadius: BorderRadius.circular(37),
-                      border: Border.all(color: Colors.white, width: 2), // White border
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 2,
+                      ), // White border
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -156,7 +170,12 @@ class HomePage extends StatelessWidget {
                 CupertinoButton(
                   padding: EdgeInsets.zero,
                   onPressed: () {
-                    // Handle navigation or functionality here
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HitungDigitPage(),
+                      ),
+                    );
                   },
                   child: Container(
                     alignment: Alignment.center,
@@ -169,7 +188,10 @@ class HomePage extends StatelessWidget {
                         end: Alignment.bottomRight,
                       ),
                       borderRadius: BorderRadius.circular(37),
-                      border: Border.all(color: Colors.white, width: 2), // White border
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 2,
+                      ), // White border
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,

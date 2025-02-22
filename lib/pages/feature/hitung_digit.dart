@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
+import '../main/consts.dart';
 import 'package:tugas2/pages/home/home.dart';
 
-import '../main/consts.dart';
-
-class NumberCheckScreen extends StatefulWidget {
-  const NumberCheckScreen({super.key});
+class HitungDigitPage extends StatefulWidget {
+  const HitungDigitPage({super.key});
 
   @override
-  _NumberCheckScreenState createState() => _NumberCheckScreenState();
+  HitungDigitScreen createState() => HitungDigitScreen();
 }
 
-class _NumberCheckScreenState extends State<NumberCheckScreen> {
+class HitungDigitScreen extends State<HitungDigitPage> {
   final TextEditingController _numberController = TextEditingController();
   String _result = '';
   Color _resultColor = Colors.white; // Default color is white
 
-  void _checkNumber() {
+  void hitungDigit() {
     final input = _numberController.text;
-    final number = int.tryParse(input);
+    int? number = int.tryParse(input);
+    
 
     if (number == null) {
       setState(() {
@@ -25,13 +25,19 @@ class _NumberCheckScreenState extends State<NumberCheckScreen> {
         _resultColor = Colors.red; // Set color to red for error
       });
       return;
-    }
-
-    setState(() {
-      _result = number % 2 == 0 ? 'Genap' : 'Ganjil';
+    } else {
+      int angka = number;
+      setState(() {
+      int total = 0;
+      while (angka != 0) {
+        total += angka % 10; // Ambil digit terakhir dan tambahkan ke sum
+        angka ~/= 10; // Hapus digit terakhir
+      }
+      _result = total.toString();
       _resultColor =
           Colors.white; // Set color to white for Ganjil, blue for Genap
     });
+    }
   }
 
   @override
@@ -105,14 +111,14 @@ class _NumberCheckScreenState extends State<NumberCheckScreen> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: _checkNumber,
+              onPressed: hitungDigit,
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 30,
                   vertical: 15,
                 ),
               ),
-              child: const Text('Cek Bilangan'),
+              child: const Text('Hitung Bilangan'),
             ),
             const SizedBox(height: 30),
             Text(
