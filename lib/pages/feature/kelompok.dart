@@ -17,12 +17,12 @@ class TeamPage extends StatelessWidget {
     TeamMember(
       name: "Arditho Damas K.",
       nim: "123220048",
-      imagePath: "assets/images/arditho.jpg", // Ganti dengan path gambar
+      imagePath: "assets/images/dito.jpg", // Ganti dengan path gambar
     ),
     TeamMember(
       name: "Vinsensius Johan",
       nim: "1232200",
-      imagePath: "assets/images/vinsensius.jpg", // Ganti dengan path gambar
+      imagePath: "assets/images/Johan.png", // Ganti dengan path gambar
     ),
   ];
 

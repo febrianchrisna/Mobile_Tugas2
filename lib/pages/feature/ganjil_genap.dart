@@ -13,12 +13,14 @@ class _NumberCheckScreenState extends State<NumberCheckScreen> {
   final TextEditingController _controller = TextEditingController();
   String? _result;
   Color _resultColor = Colors.white; // Default color is white
+  String? _errorMessage;
 
   void _checkNumber() {
     final input = _controller.text;
     if (input.isEmpty) {
       setState(() {
-        _result = 'Masukkan bilangan terlebih dahulu!';
+        _errorMessage = 'Masukkan bilangan terlebih dahulu!';
+        _result = null;
         _resultColor = Colors.red; // Set color to red for error
       });
       return;
@@ -27,13 +29,15 @@ class _NumberCheckScreenState extends State<NumberCheckScreen> {
     final number = int.tryParse(input);
     if (number == null) {
       setState(() {
-        _result = 'Input tidak valid!';
+        _errorMessage = 'Input tidak valid!';
+        _result = null;
         _resultColor = Colors.red; // Set color to red for error
       });
       return;
     }
 
     setState(() {
+      _errorMessage = null; // Clear error message if valid input
       _result = number % 2 == 0 ? 'Genap' : 'Ganjil';
       _resultColor = Colors.white; // Set color to white for Ganjil, blue for Genap
     });
@@ -71,16 +75,17 @@ class _NumberCheckScreenState extends State<NumberCheckScreen> {
               style: TextStyle(
                 color: kInputColor,
               ),
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
                 labelText: 'Masukkan bilangan',
-                labelStyle: TextStyle(color: Colors.white), // Mengubah warna label menjadi putih
-                enabledBorder: OutlineInputBorder(
+                labelStyle: const TextStyle(color: Colors.white), // Mengubah warna label menjadi putih
+                enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white, width: 2), // Mengubah warna border menjadi putih
                 ),
-                focusedBorder: OutlineInputBorder(
+                focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white, width: 2), // Border saat fokus
                 ),
+                errorText: _errorMessage, // Menampilkan error message
               ),
               onChanged: (value) {
                 setState(() {

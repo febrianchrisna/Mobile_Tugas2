@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tugas2/pages/feature//kalkulator.dart';
 import 'package:tugas2/pages/feature/ganjil_genap.dart';
+import 'package:tugas2/pages/feature/hitung_digit.dart';
 import 'package:tugas2/pages/feature/kelompok.dart';
 import 'package:tugas2/pages/main/consts.dart'; // Pastikan g1 dan g2 terdefinisi di sini
 import 'package:tugas2/pages/login/login.dart'; // Pastikan halaman LoginPage diimport
@@ -160,7 +161,10 @@ class HomePage extends StatelessWidget {
                 CupertinoButton(
                   padding: EdgeInsets.zero,
                   onPressed: () {
-                    // Handle navigation or functionality here
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => DigitCalculator()),
+                    );
                   },
                   child: Container(
                     alignment: Alignment.center,
