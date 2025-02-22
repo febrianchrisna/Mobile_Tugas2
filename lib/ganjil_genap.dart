@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tugas2/pages/home/home.dart';
-import 'package:tugas2/pages/main/consts.dart';
+import 'package:tugas2/home.dart';
+import 'package:tugas2/consts.dart';
 
 class NumberCheckScreen extends StatefulWidget {
   const NumberCheckScreen({super.key});

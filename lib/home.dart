@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tugas2/pages/feature//kalkulator.dart';
-import 'package:tugas2/pages/feature/ganjil_genap.dart';
-import 'package:tugas2/pages/feature/hitung_digit.dart';
-import 'package:tugas2/pages/feature/kelompok.dart';
-import 'package:tugas2/pages/main/consts.dart'; // Pastikan g1 dan g2 terdefinisi di sini
-import 'package:tugas2/pages/login/login.dart'; // Pastikan halaman LoginPage diimport
+import 'package:tugas2/kalkulator.dart';
+import 'package:tugas2/ganjil_genap.dart';
+import 'package:tugas2/hitung_digit.dart';
+import 'package:tugas2/kelompok.dart';
+import 'package:tugas2/consts.dart'; // Pastikan g1 dan g2 terdefinisi di sini
+import 'package:tugas2/login.dart'; // Pastikan halaman LoginPage diimport
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

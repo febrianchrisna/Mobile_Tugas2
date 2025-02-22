@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tugas2/pages/home/home.dart';
-import 'package:tugas2/pages/main/consts.dart';
+import 'package:tugas2/home.dart';
+import 'package:tugas2/consts.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
